@@ -25,6 +25,7 @@ async function run() {
     const carCollection = client.db("carsDatabase").collection("cars");
     const categoryCollection = client.db("carsDatabase").collection("categories");
     const userCollection = client.db("carsDatabase").collection("users");
+    const orderCollection = client.db("carsDatabase").collection("orders");
 
     // API routes
     // categories API
@@ -72,6 +73,13 @@ async function run() {
       const filter = {};
       const result = await userCollection.find(filter).toArray();
       res.send(result);
+    })
+
+    // orders API
+    app.post('/orders', async(req, res) => {
+      const order = req.body;
+      const result = await orderCollection.insertOne(order);
+      res.send(result); 
     })
 
   } 
