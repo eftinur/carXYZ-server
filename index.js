@@ -68,6 +68,13 @@ async function run() {
       res.send(cars);
     });
 
+    app.post('/cars', async(req, res) => {
+      const car = req.body;
+      const result = await carCollection.insertOne(car);
+      res.send(result);
+    })
+
+
     // users API
     app.post("/users", async (req, res) => {
       const user = req.body;
@@ -126,6 +133,7 @@ async function run() {
     });
 
     // orders API
+
   } 
   
   finally {
