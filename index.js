@@ -74,6 +74,20 @@ async function run() {
       res.send(result);
     })
 
+    app.get('/carseller', async(req, res) => {
+      const email = req.query.email;
+      const query = { email: email};
+      const result = await carCollection.find(query).toArray();
+      res.send(result);
+    })
+
+    app.delete('/cars/:id', async(req, res) => {
+      const id = req.params.id;
+      const filter = { _id: ObjectId(id)};
+      const result = await carCollection.deleteOne(filter);
+      res.send(result);
+    })
+
 
     // users API
     app.post("/users", async (req, res) => {
